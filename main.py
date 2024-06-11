@@ -1,4 +1,5 @@
 import os
+from os import system
 import time as t
 import pygetwindow as gw
 import pyautogui as pag
@@ -8,6 +9,7 @@ import sys
 from colorama import init, Fore, Style
 
 init()
+system("AutoBanana")
 clear = lambda: os.system("cls")
 
 
