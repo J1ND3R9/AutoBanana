@@ -6,10 +6,11 @@ import pyautogui as pag
 import datetime
 import keyboard
 import sys
+import psutil
 from colorama import init, Fore, Style
 
 init()
-system("AutoBanana")
+system("title AutoBanana")
 clear = lambda: os.system("cls")
 
 
@@ -56,9 +57,10 @@ def clickOnBanana(time):
 
 
 def banana_window_is_exist():
-    window = gw.getWindowsWithTitle("Banana")
-    if window:
-        return True
+    proc_name = "Banana.exe"
+    for proc in psutil.process_iter():
+        if proc.name() == proc_name:
+            return True
     return False
 
 
@@ -118,18 +120,6 @@ else:
         print(Fore.RED + f"ERROR: {ve}")
         input("Close program")
         quit()
-
-print(
-    Fore.RED
-    + 'Close all windows with title "Banana"!\nOr skip the warn by pressing the HOME key'
-)
-not_closed_window = gw.getWindowsWithTitle("Banana")
-while 1:
-    not_closed_window = gw.getWindowsWithTitle("Banana")
-    if keyboard.is_pressed("esc"):
-        quit()
-    if not not_closed_window or keyboard.is_pressed("home"):
-        break
 clear()
 
 
@@ -152,8 +142,10 @@ while 1:
             sys.stdout.flush()
             timerClick -= 1
             t.sleep(1)
-    window = gw.getWindowsWithTitle("Banana")[0]
-    window.close()
+    proc_name = "Banana.exe"
+    for proc in psutil.process_iter():
+        if proc.name() == proc_name:
+            proc.kill()
     now = datetime.datetime.now()
     clear()
     print(Fore.YELLOW + "Closing time:", now.strftime("%H:%M"))
