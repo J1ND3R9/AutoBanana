@@ -132,7 +132,7 @@ clear()
 
 
 while 1:
-    timerClick = 2
+    timerClick = 480
     timerWait = 10800
     print(Fore.YELLOW + "Launching Banana")
     openBanana(path)
